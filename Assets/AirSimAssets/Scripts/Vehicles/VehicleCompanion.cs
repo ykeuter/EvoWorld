@@ -102,7 +102,8 @@ namespace AirSimUnity {
                 Marshal.GetFunctionPointerForDelegate(new Func<string, bool>(Reset)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, AirSimVector>(GetVelocity)),
                 Marshal.GetFunctionPointerForDelegate(new Func<AirSimVector, AirSimVector, string, RayCastHitResult>(GetRayCastHit)),
-                Marshal.GetFunctionPointerForDelegate(new Func<string, float, bool>(Pause))
+                Marshal.GetFunctionPointerForDelegate(new Func<string, float, bool>(Pause)),
+                Marshal.GetFunctionPointerForDelegate(new Func<string, float>(GetHealth))
             );
         }
 
@@ -209,8 +210,14 @@ namespace AirSimUnity {
 
         private static bool Pause(string vehicleName, float timeScale)
         {
-            var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
-            return vehicle.VehicleInterface.Pause(timeScale);
+          var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
+          return vehicle.VehicleInterface.Pause(timeScale);
         }
-    }
+
+        private static float GetHealth(string vehicleName)
+        {
+          var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
+          return vehicle.VehicleInterface.GetHealth();
+        }
+  }
 }

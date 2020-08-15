@@ -45,6 +45,7 @@ namespace AirSimUnity {
         Vector3 endVec;
         RaycastHit hitInfo;
         bool hitResult;
+        [SerializeField] float health;
 
         //Ensure to call this method as the first statement, from derived class `Start()` method.
         protected void Start() {
@@ -132,6 +133,7 @@ namespace AirSimUnity {
                 collisionInfo.time_stamp = DataManager.GetCurrentTimeInMilli();
 
                 airsimInterface.InvokeCollisionDetectionInAirSim(collisionInfo);
+                Debug.Log("Collision!!");
             }
         }
 
@@ -360,6 +362,10 @@ namespace AirSimUnity {
                     viewCam.SetShaderEffect(ImageType.Segmentation);
                 }
             }
+        }
+
+        public float GetHealth() {
+            return health;
         }
     }
 }
