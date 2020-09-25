@@ -50,3 +50,5 @@ crashlytics-build.properties
 # Github plugin
 GitHub/
 GitHub.meta
+
+.env
