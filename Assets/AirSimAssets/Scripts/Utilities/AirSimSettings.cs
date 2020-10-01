@@ -194,7 +194,7 @@ namespace AirSimUnity {
 
         //Get the settings from the "setting.json" file.
         private static string GetSettingsContent() {
-            var fileName = InitializeAirSim.GetAirSimSettingsFileName();
+            var fileName = Environment.GetEnvironmentVariable("AIRSIM_SETTINGS_FILE");
 
             string content = "";
             try {
