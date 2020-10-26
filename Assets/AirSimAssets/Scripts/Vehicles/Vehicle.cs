@@ -46,6 +46,7 @@ namespace AirSimUnity {
         RaycastHit hitInfo;
         bool hitResult;
         [SerializeField] float health;
+        [SerializeField] string vehicleName;
 
         //Ensure to call this method as the first statement, from derived class `Start()` method.
         protected void Start() {
@@ -56,18 +57,19 @@ namespace AirSimUnity {
 
             InitializeVehicle();
 
-            airsimInterface = VehicleCompanion.GetVehicleCompanion(this);
-            isServerStarted = airsimInterface.StartVehicleServer(AirSimSettings.GetSettings().LocalHostIP);
+            airsimInterface = VehicleCompanion.GetVehicleCompanion(vehicleName, this);
+            //isServerStarted = airsimInterface.StartVehicleServer(AirSimSettings.GetSettings().LocalHostIP);
+            isServerStarted = true; // just to keep code as-is
 
-            if (isServerStarted == false)
-            {
-#if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
-                EditorApplication.Exit(1);
-#else
-                Application.Quit();
-#endif
-            }
+//            if (isServerStarted == false)
+//            {
+//#if UNITY_EDITOR
+//                EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
+//                EditorApplication.Exit(1);
+//#else
+//                Application.Quit();
+//#endif
+//            }
         }
 
         //Ensure to call this method as the first statement, from derived class `FixedUpdate()` method.
@@ -114,7 +116,7 @@ namespace AirSimUnity {
                     print_log_messages_ = !print_log_messages_;
                 }
 
-                airsimInterface.InvokeTickInAirSim(Time.deltaTime);
+                //airsimInterface.InvokeTickInAirSim(Time.deltaTime);
             }
         }
 
@@ -132,7 +134,7 @@ namespace AirSimUnity {
                 collisionInfo.object_name = collision.collider.name;
                 collisionInfo.time_stamp = DataManager.GetCurrentTimeInMilli();
 
-                airsimInterface.InvokeCollisionDetectionInAirSim(collisionInfo);
+                airsimInterface.InvokeCollisionDetectionInAirSim(vehicleName, collisionInfo);
                 Debug.Log("Collision!!");
             }
         }
@@ -161,7 +163,7 @@ namespace AirSimUnity {
         }
 
         protected void OnApplicationQuit() {
-            airsimInterface.StopVehicleServer();
+            //airsimInterface.StopVehicleServer();
         }
 
         //Define the recording data that needs to be saved in the airsim_rec file for Toggle Recording button

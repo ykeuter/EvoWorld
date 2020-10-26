@@ -17,7 +17,7 @@ public class Landscape : MonoBehaviour
       for (int j = 0; j < width; j++)
       {
         float z = (float)j - width / 2.0f + .5f;
-        Instantiate(foodPrefab, new  Vector3(x, height, z), foodPrefab.transform.rotation);
+        //Instantiate(foodPrefab, new  Vector3(x, height, z), foodPrefab.transform.rotation);
       }
     }
   }

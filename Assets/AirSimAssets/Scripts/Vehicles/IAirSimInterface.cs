@@ -14,6 +14,6 @@ namespace AirSimUnity
 
         void InvokeTickInAirSim(float deltaSecond);
 
-        void InvokeCollisionDetectionInAirSim(CollisionInfo collisionInfo);
+        void InvokeCollisionDetectionInAirSim(string vehicleName, CollisionInfo collisionInfo);
     }
 }

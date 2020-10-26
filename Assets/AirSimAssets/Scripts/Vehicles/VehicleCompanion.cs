@@ -36,24 +36,25 @@ namespace AirSimUnity {
             basePortId = AirSimSettings.GetSettings().GetPortIDForVehicle(isDrone);
         }
 
-        public static VehicleCompanion GetVehicleCompanion(IVehicleInterface vehicleInterface) {
+        public static VehicleCompanion GetVehicleCompanion(string vehicleName, IVehicleInterface vehicleInterface) {
             var companion = new VehicleCompanion(vehicleInterface);
+            companion.vehicleName = vehicleName;
 
-            if (AirSimSettings.GetSettings().SimMode == "Car")
-                companion.vehicleName = "PhysXCar";
-            else if (AirSimSettings.GetSettings().SimMode == "Multirotor")
-                companion.vehicleName = "SimpleFlight";
+            //if (AirSimSettings.GetSettings().SimMode == "Car")
+            //    companion.vehicleName = "PhysXCar";
+            //else if (AirSimSettings.GetSettings().SimMode == "Multirotor")
+            //    companion.vehicleName = "SimpleFlight";
 
             Vehicles.Add(companion);
             return companion;
         }
 
         public bool StartVehicleServer(string hostIP) {
-            return PInvokeWrapper.StartServer(vehicleName, AirSimSettings.GetSettings().SimMode, basePortId);
+            return PInvokeWrapper.StartServer(AirSimSettings.GetSettings().SimMode, basePortId);
         }
 
         public void StopVehicleServer() {
-            PInvokeWrapper.StopServer(vehicleName);
+            PInvokeWrapper.StopServer();
         }
 
         public void InvokeTickInAirSim(float deltaSecond)
@@ -61,9 +62,9 @@ namespace AirSimUnity {
             PInvokeWrapper.CallTick(deltaSecond);
         }
 
-        public void InvokeCollisionDetectionInAirSim(CollisionInfo collisionInfo)
+        public void InvokeCollisionDetectionInAirSim(string vehicleName, CollisionInfo collisionInfo)
         {
-            PInvokeWrapper.InvokeCollisionDetection(collisionInfo);
+            PInvokeWrapper.InvokeCollisionDetection(vehicleName, collisionInfo);
         }
 
         public KinemticState GetKinematicState() {
@@ -99,10 +100,10 @@ namespace AirSimUnity {
                 Marshal.GetFunctionPointerForDelegate(new Func<string, int>(GetSegmentationObjectId)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, string, string, int, bool>(PrintLogMessage)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, UnityTransform>(GetTransformFromUnity)),
-                Marshal.GetFunctionPointerForDelegate(new Func<string, bool>(Reset)),
+                Marshal.GetFunctionPointerForDelegate(new Func<bool>(Reset)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, AirSimVector>(GetVelocity)),
                 Marshal.GetFunctionPointerForDelegate(new Func<AirSimVector, AirSimVector, string, RayCastHitResult>(GetRayCastHit)),
-                Marshal.GetFunctionPointerForDelegate(new Func<string, float, bool>(Pause)),
+                Marshal.GetFunctionPointerForDelegate(new Func<float, bool>(Pause)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, float>(GetHealth))
             );
         }
@@ -141,10 +142,12 @@ namespace AirSimUnity {
             return vehicle.VehicleInterface.GetTransform();
         }
 
-        private static bool Reset(string vehicleName)
+        private static bool Reset()
         {
-            var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
-            vehicle.VehicleInterface.ResetVehicle();
+            foreach (var vehicle in Vehicles)
+            {
+                vehicle.VehicleInterface.ResetVehicle();
+            }
             return true;
         }
 
@@ -196,8 +199,22 @@ namespace AirSimUnity {
         }
 
         private static bool PrintLogMessage(string message, string messageParams, string vehicleName, int severity) {
-            var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
-            return vehicle.VehicleInterface.PrintLogMessage(message, messageParams, vehicleName, severity);
+            //var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
+            //return vehicle.VehicleInterface.PrintLogMessage(message, messageParams, vehicleName, severity);
+
+            if (severity == 2)
+            {
+                Debug.LogError(message + " " + messageParams + " Vehicle=" + vehicleName);
+            }
+            else if (severity == 1)
+            {
+                Debug.LogWarning(message + " " + messageParams + " Vehicle=" + vehicleName);
+            }
+            else
+            {
+                Debug.Log(message + " " + messageParams + " Vehicle=" + vehicleName);
+            }
+            return true;
         }
 
         private static bool SetSegmentationObjectId(string objectName, int objectId, bool isNameRegex) {
@@ -208,10 +225,13 @@ namespace AirSimUnity {
             return Vehicle.GetSegmentationObjectId(objectName);
         }
 
-        private static bool Pause(string vehicleName, float timeScale)
+        private static bool Pause(float timeScale)
         {
-          var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
-          return vehicle.VehicleInterface.Pause(timeScale);
+            foreach (var vehicle in Vehicles)
+            {
+                vehicle.VehicleInterface.Pause(timeScale);
+            }
+            return true;
         }
 
         private static float GetHealth(string vehicleName)
