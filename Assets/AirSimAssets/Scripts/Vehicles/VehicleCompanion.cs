@@ -49,13 +49,13 @@ namespace AirSimUnity {
             return companion;
         }
 
-        public bool StartVehicleServer(string hostIP) {
-            return PInvokeWrapper.StartServer(AirSimSettings.GetSettings().SimMode, basePortId);
-        }
+        //public bool StartVehicleServer(string hostIP) {
+        //    return PInvokeWrapper.StartServer(vehicleName, AirSimSettings.GetSettings().SimMode, basePortId);
+        //}
 
-        public void StopVehicleServer() {
-            PInvokeWrapper.StopServer();
-        }
+        //public void StopVehicleServer() {
+        //    PInvokeWrapper.StopServer(vehicleName);
+        //}
 
         public void InvokeTickInAirSim(float deltaSecond)
         {
