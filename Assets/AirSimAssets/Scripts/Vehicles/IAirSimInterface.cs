@@ -6,9 +6,9 @@ namespace AirSimUnity
      */
     public interface IAirSimInterface
     {
-        bool StartVehicleServer(string hostIP);
+        //bool StartVehicleServer(string hostIP);
 
-        void StopVehicleServer();
+        //void StopVehicleServer();
 
         KinemticState GetKinematicState();
 
