@@ -24,7 +24,7 @@ namespace AirSimUnity
             {
 #if UNITY_EDITOR
                 EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
-                EditorApplication.Exit(1);
+                //EditorApplication.Exit(1);
 #else
                 Application.Quit();
 #endif
@@ -36,6 +36,11 @@ namespace AirSimUnity
         {
             PInvokeWrapper.CallTick(Time.deltaTime);
         }
+
+        //void FixedUpdate()
+        //{
+        //    PInvokeWrapper.CallTick(Time.deltaTime);
+        //}
 
         protected void OnApplicationQuit()
         {

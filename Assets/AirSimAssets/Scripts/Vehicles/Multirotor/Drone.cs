@@ -35,11 +35,14 @@ namespace AirSimUnity {
 
                 base.FixedUpdate();
 
-                DataManager.SetToUnity(poseFromAirLib.position, ref position);
-                DataManager.SetToUnity(poseFromAirLib.orientation, ref rotation);
+                if (poseFromAirLibSet)
+                {
+                    DataManager.SetToUnity(poseFromAirLib.position, ref position);
+                    DataManager.SetToUnity(poseFromAirLib.orientation, ref rotation);
 
-                transform.position = position;
-                transform.rotation = rotation;
+                    transform.position = position;
+                    transform.rotation = rotation;
+                }
 
                 for (int i = 0; i < rotors.Length; i++)
                 {

@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuadCopter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1875394544442156, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1878785252202278, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -271,11 +275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -340,15 +344,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4943211950449684, guid: f63bf11bc2a9a7146a4375d511e1425c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -654,7 +658,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716284897}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89ec63efd5856254da3392afd167a560, type: 3}
   m_Name: 
@@ -727,13 +731,56 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716284897}
-  m_LocalRotation: {x: 0.101316795, y: 0, z: 0, w: 0.9948542}
-  m_LocalPosition: {x: -10.8, y: 59.7, z: 49.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 11.63, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720510777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720510779}
+  - component: {fileID: 720510778}
+  m_Layer: 0
+  m_Name: AirSimTicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720510778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720510777}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ade50aa9faec044ab09a408de53e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &720510779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720510777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.081686, y: 99.58863, z: -0.5442866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989851396
 GameObject:
   m_ObjectHideFlags: 0

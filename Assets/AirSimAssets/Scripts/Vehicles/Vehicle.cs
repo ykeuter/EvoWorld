@@ -26,6 +26,7 @@ namespace AirSimUnity {
         protected bool isApiEnabled = false;
         protected bool isServerStarted = false;
         bool print_log_messages_ = true;
+        protected bool poseFromAirLibSet = false;
 
         protected List<DataCaptureScript> captureCameras = new List<DataCaptureScript>();
 
@@ -61,15 +62,15 @@ namespace AirSimUnity {
             //isServerStarted = airsimInterface.StartVehicleServer(AirSimSettings.GetSettings().LocalHostIP);
             isServerStarted = true; // just to keep code as-is
 
-//            if (isServerStarted == false)
-//            {
-//#if UNITY_EDITOR
-//                EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
-//                EditorApplication.Exit(1);
-//#else
-//                Application.Quit();
-//#endif
-//            }
+            //            if (isServerStarted == false)
+            //            {
+            //#if UNITY_EDITOR
+            //                EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
+            //                EditorApplication.Exit(1);
+            //#else
+            //                Application.Quit();
+            //#endif
+            //            }
         }
 
         //Ensure to call this method as the first statement, from derived class `FixedUpdate()` method.
@@ -182,6 +183,7 @@ namespace AirSimUnity {
 
         public bool SetPose(AirSimPose pose, bool ignore_collision) {
             poseFromAirLib = pose;
+            poseFromAirLibSet = true;
             return true;
         }
 

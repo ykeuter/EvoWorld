@@ -53,3 +53,5 @@ GitHub.meta
 
 .env
 .vscode/
+*.lib*
+*.exp*
