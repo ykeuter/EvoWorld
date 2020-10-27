@@ -14,13 +14,17 @@ public class SmoothFollow : MonoBehaviour {
     private Vector3 offsetPostion, finalPosition;
 
     private void Start() {
-        offsetPostion = new Vector3(0, 5, -10);
+        //offsetPostion = new Vector3(0, 5, -10);
+        offsetPostion = transform.position - target.position;
     }
 
     private void LateUpdate() {
         if (!target) {
             return;
         }
+
+        transform.position = target.position + offsetPostion;
+        return;
 
         // Calculate the current rotation angles
         wantedRotationAngle = target.eulerAngles.y;

@@ -26,7 +26,7 @@ namespace AirSimUnity {
         protected bool isApiEnabled = false;
         protected bool isServerStarted = false;
         bool print_log_messages_ = true;
-        protected bool poseFromAirLibSet = false;
+        protected bool poseFromAirLibSet = true;
 
         protected List<DataCaptureScript> captureCameras = new List<DataCaptureScript>();
 
