@@ -14,7 +14,12 @@ namespace AirSimUnity {
         public Transform[] rotors;
         private List<RotorInfo> rotorInfos = new List<RotorInfo>();
         private float rotationFactor = 0.1f;
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            health++;
+        }
+
         private new void Start() {
             base.Start(); 
 

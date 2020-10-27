@@ -2,7 +2,7 @@
  "SimMode" : "Multirotor", 
  "SettingsVersion" : 1.2,
   "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
-  "ClockSpeed": 5.0,
+  "ClockSpeed": 3.0,
   "ViewMode":  "NoDisplay",
   "Vehicles": {
     "Drone1": {

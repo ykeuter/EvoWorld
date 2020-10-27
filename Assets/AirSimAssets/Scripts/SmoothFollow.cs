@@ -24,6 +24,7 @@ public class SmoothFollow : MonoBehaviour {
         }
 
         transform.position = target.position + offsetPostion;
+        transform.LookAt(target);
         return;
 
         // Calculate the current rotation angles

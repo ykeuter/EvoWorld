@@ -46,7 +46,7 @@ namespace AirSimUnity {
         Vector3 endVec;
         RaycastHit hitInfo;
         bool hitResult;
-        [SerializeField] float health;
+        [SerializeField] protected float health;
         [SerializeField] string vehicleName;
 
         //Ensure to call this method as the first statement, from derived class `Start()` method.
