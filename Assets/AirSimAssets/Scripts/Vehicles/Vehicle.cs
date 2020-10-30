@@ -26,7 +26,7 @@ namespace AirSimUnity {
         protected bool isApiEnabled = false;
         protected bool isServerStarted = false;
         bool print_log_messages_ = true;
-        protected bool poseFromAirLibSet = true;
+        protected bool poseFromAirLibSet = false;
 
         protected List<DataCaptureScript> captureCameras = new List<DataCaptureScript>();
 
@@ -117,7 +117,7 @@ namespace AirSimUnity {
                     print_log_messages_ = !print_log_messages_;
                 }
 
-                //airsimInterface.InvokeTickInAirSim(Time.deltaTime);
+                airsimInterface.InvokeTickInAirSim(Time.deltaTime);
             }
         }
 
@@ -135,8 +135,9 @@ namespace AirSimUnity {
                 collisionInfo.object_name = collision.collider.name;
                 collisionInfo.time_stamp = DataManager.GetCurrentTimeInMilli();
 
+                Debug.Log($"Collision: {currentPose.position.x}, {currentPose.position.y}, {currentPose.position.z} (cur), {transform.position.x}, {transform.position.y}, {transform.position.z} (trans)");
+
                 airsimInterface.InvokeCollisionDetectionInAirSim(vehicleName, collisionInfo);
-                Debug.Log("Collision!!");
             }
         }
 
@@ -182,12 +183,14 @@ namespace AirSimUnity {
         }
 
         public bool SetPose(AirSimPose pose, bool ignore_collision) {
+            Debug.Log($"Set: {pose.position.x}, {pose.position.y}, {pose.position.z}");
             poseFromAirLib = pose;
             poseFromAirLibSet = true;
             return true;
         }
 
         public AirSimPose GetPose() {
+            Debug.Log($"Get: {currentPose.position.x}, {currentPose.position.y}, {currentPose.position.z}");
             return currentPose;
         }
 

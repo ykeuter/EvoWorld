@@ -47,6 +47,8 @@ namespace AirSimUnity {
 
                     transform.position = position;
                     transform.rotation = rotation;
+
+                    currentPose = poseFromAirLib;
                 }
 
                 for (int i = 0; i < rotors.Length; i++)
@@ -56,6 +58,7 @@ namespace AirSimUnity {
                     rotors[i].Rotate(Vector3.up, rotorSpeed * Time.deltaTime, Space.Self);
                 }
             }
+            Debug.Log($"Fixed: {transform.position.x}, {transform.position.y}, {transform.position.z}");
         }
 
         private new void LateUpdate() {

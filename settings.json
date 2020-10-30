@@ -7,6 +7,9 @@
   "Vehicles": {
     "Drone1": {
       "VehicleType": "SimpleFlight"
+    },
+    "Drone2": {
+      "VehicleType": "SimpleFlight"
     }
   } 
 }

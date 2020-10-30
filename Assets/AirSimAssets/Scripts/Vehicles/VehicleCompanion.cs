@@ -212,7 +212,7 @@ namespace AirSimUnity {
             }
             else
             {
-                Debug.Log(message + " " + messageParams + " Vehicle=" + vehicleName);
+                //Debug.Log(message + " " + messageParams + " Vehicle=" + vehicleName);
             }
             return true;
         }

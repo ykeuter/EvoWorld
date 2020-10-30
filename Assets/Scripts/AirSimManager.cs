@@ -34,7 +34,7 @@ namespace AirSimUnity
         // Update is called once per frame
         void LateUpdate()
         {
-            PInvokeWrapper.CallTick(Time.deltaTime);
+            //PInvokeWrapper.CallTick(Time.deltaTime);
         }
 
         //void FixedUpdate()
