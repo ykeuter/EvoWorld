@@ -20,7 +20,7 @@ namespace AirSimUnity
 
         void FixedUpdate()
         {
-            PInvokeWrapper.CallTick(Time.deltaTime);
+            PInvokeWrapper.CallTick(Time.fixedDeltaTime);
         }
     }
 }

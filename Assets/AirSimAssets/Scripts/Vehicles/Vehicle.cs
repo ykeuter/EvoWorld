@@ -117,7 +117,7 @@ namespace AirSimUnity {
                     print_log_messages_ = !print_log_messages_;
                 }
 
-                airsimInterface.InvokeTickInAirSim(Time.deltaTime);
+                //airsimInterface.InvokeTickInAirSim(Time.deltaTime);
             }
         }
 
