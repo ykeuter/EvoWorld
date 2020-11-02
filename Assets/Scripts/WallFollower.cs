@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+
+public class WallFollower : Agent
 {
     float chargeTime = 5.0f;
     float timeLeft;
@@ -14,6 +17,9 @@ public class Agent : MonoBehaviour
     {
         timeLeft = chargeTime;
     }
+
+
+
 
     // Update is called once per frame
     void Update()
