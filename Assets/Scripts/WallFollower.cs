@@ -11,13 +11,29 @@ public class WallFollower : Agent
     float timeLeft;
     float age = 0.0f;
     float speed = 1.0f;
+    GameManager gm;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        timeLeft = chargeTime;
+        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
+    public override void OnEpisodeBegin()
+    {
+        timeLeft = chargeTime;
+        age = 0;
+        gm.ResetArea();
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        float x = transform.position.x;
+        float z = transform.position.z;
+        sensor.AddObservation(gm.roomSize / 2 - x);
+        sensor.AddObservation(gm.roomSize / 2 + x);
+        sensor.AddObservation(gm.roomSize / 2 - z);
+        sensor.AddObservation(gm.roomSize / 2 + z);
+    }
 
 
 
@@ -27,28 +43,32 @@ public class WallFollower : Agent
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            GameOver();
+            EndEpisode();
         }
         age += Time.deltaTime;
+    }
 
-        transform.position += transform.forward * Input.GetAxis("Vertical") * Time.deltaTime * speed;
-        transform.position += transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+    public override void OnActionReceived(float[] vectorAction)
+    {
+        transform.position += transform.forward * vectorAction[0] * Time.fixedDeltaTime * speed;
+        transform.position += transform.right * vectorAction[1] * Time.fixedDeltaTime * speed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
         timeLeft = chargeTime;
+        AddReward(1);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision!");
-        GameOver();
+        EndEpisode();
     }
 
-    void GameOver()
+    public override void Heuristic(float[] actionsOut)
     {
-        //Debug.Log("Game Over!");
+        actionsOut[0] = Input.GetAxis("Vertical");
+        actionsOut[1] = Input.GetAxis("Horizontal");
     }
 }

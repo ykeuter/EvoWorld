@@ -155,8 +155,10 @@ MonoBehaviour:
   width: 1
   density: 4
   height: 1.5
-  pill: {fileID: 5422187042329876654, guid: 7c0aa75f1d031e941910dd84cd30ee7c, type: 3}
-  agent: {fileID: 5205032844523782849, guid: 53b6b7767f19b124997d45bec8057913, type: 3}
+  pillPrefab: {fileID: 5422187042329876654, guid: 7c0aa75f1d031e941910dd84cd30ee7c,
+    type: 3}
+  wfPrefab: {fileID: 3270596179620057414, guid: 5216c9a4311e74940bade4245ee59032,
+    type: 3}
 --- !u!4 &6890214
 Transform:
   m_ObjectHideFlags: 0
