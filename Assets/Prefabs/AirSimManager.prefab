@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397489204776874876}
   - component: {fileID: 397489204776874867}
+  - component: {fileID: 1119626240527340911}
   m_Layer: 0
   m_Name: AirSimManager
   m_TagString: Untagged
@@ -41,5 +42,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d0e3ed04b4e1e04d916a0642df06a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1119626240527340911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397489204776874866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ade50aa9faec044ab09a408de53e1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

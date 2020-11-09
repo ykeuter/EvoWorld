@@ -11,28 +11,28 @@ public class WallFollower : Agent
     float timeLeft;
     float age = 0.0f;
     float speed = 1.0f;
-    GameManager gm;
+    WallFollowManager wfm;
 
     private void Awake()
     {
-        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        wfm = GameObject.Find("Game Manager").GetComponent<WallFollowManager>();
     }
 
     public override void OnEpisodeBegin()
     {
         timeLeft = chargeTime;
         age = 0;
-        gm.ResetArea();
+        wfm.Reset();
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         float x = transform.position.x;
         float z = transform.position.z;
-        sensor.AddObservation(gm.roomSize / 2 - x);
-        sensor.AddObservation(gm.roomSize / 2 + x);
-        sensor.AddObservation(gm.roomSize / 2 - z);
-        sensor.AddObservation(gm.roomSize / 2 + z);
+        sensor.AddObservation(wfm.roomSize / 2 - x);
+        sensor.AddObservation(wfm.roomSize / 2 + x);
+        sensor.AddObservation(wfm.roomSize / 2 - z);
+        sensor.AddObservation(wfm.roomSize / 2 + z);
     }
 
 
@@ -56,7 +56,6 @@ public class WallFollower : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
         timeLeft = chargeTime;
         AddReward(1);
     }

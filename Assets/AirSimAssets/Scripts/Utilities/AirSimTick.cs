@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AirSimUnity 
 {
-    public class AirSimTicker : MonoBehaviour
+    public class AirSimTick : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

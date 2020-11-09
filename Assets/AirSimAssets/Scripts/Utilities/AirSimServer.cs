@@ -10,7 +10,7 @@ using UnityEditor;
 namespace AirSimUnity
 {
 
-    public class AirSimManager : MonoBehaviour
+    public class AirSimServer : MonoBehaviour
     {
         private const string DRONE_MODE = "Multirotor";
 
