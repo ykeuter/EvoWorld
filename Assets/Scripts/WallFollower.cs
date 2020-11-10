@@ -10,7 +10,7 @@ public class WallFollower : Agent
     float chargeTime = 5.0f;
     float timeLeft;
     float age = 0.0f;
-    float speed = 1.0f;
+    float speed = 2.0f;
     WallFollowManager wfm;
 
     private void Awake()
