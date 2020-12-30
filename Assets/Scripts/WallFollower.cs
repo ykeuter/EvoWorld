@@ -27,17 +27,17 @@ public class WallFollower : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        float x = transform.position.x;
-        float z = transform.position.z;
-        float d = wfm.roomSize / 2;
-        float forward = z > 0 ? z / d : 0;
-        float right = x > 0 ? x / d : 0;
-        float back = z < 0 ? -z / d : 0;
-        float left = x < 0 ? -x / d : 0;
-        sensor.AddObservation(forward);
-        sensor.AddObservation(right);
-        sensor.AddObservation(back);
-        sensor.AddObservation(left);
+        //float x = transform.position.x;
+        //float z = transform.position.z;
+        //float d = wfm.roomSize / 2;
+        //float forward = z > 0 ? z / d : 0;
+        //float right = x > 0 ? x / d : 0;
+        //float back = z < 0 ? -z / d : 0;
+        //float left = x < 0 ? -x / d : 0;
+        //sensor.AddObservation(forward);
+        //sensor.AddObservation(right);
+        //sensor.AddObservation(back);
+        //sensor.AddObservation(left);
     }
 
 

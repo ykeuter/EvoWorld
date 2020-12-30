@@ -13,6 +13,7 @@ public class WallFollowManager : MonoBehaviour
     List<Reward> rewards = new List<Reward>();
     WallFollower player;
 
+    [SerializeField] List<GameObject> obstacles;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -48,12 +49,20 @@ public class WallFollowManager : MonoBehaviour
         {
             r.Reset();
         }
+        player.transform.position = getRandomPosition();
+    }
 
+    Vector3 getRandomPosition() {
         float d = roomSize / 2 - width * 1.5f;
         float x = Random.Range(-d, d);
         float y = playerPrefab.transform.position.y;
         float z = Random.Range(-d, d);
-        player.transform.position = new Vector3(x, y, z);
+        Vector3 p = new Vector3(x, y, z);
+        foreach (GameObject g in obstacles) {
+            if (Vector3.Distance(p, g.transform.position) < width)
+                return getRandomPosition();
+        }
+        return p;
     }
 
     // Update is called once per frame
