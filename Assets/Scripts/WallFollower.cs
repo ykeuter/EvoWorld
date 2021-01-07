@@ -16,14 +16,14 @@ public class WallFollower : Agent
 
     private void Awake()
     {
-        wfm = GameObject.Find("Game Manager").GetComponent<WallFollowManager>();
+        //wfm = GameObject.Find("Game Manager").GetComponent<WallFollowManager>();
     }
 
     public override void OnEpisodeBegin()
     {
-        timeLeft = chargeTime;
-        age = 0;
-        wfm.Reset();
+        //timeLeft = chargeTime;
+        //age = 0;
+        //wfm.Reset();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -49,7 +49,8 @@ public class WallFollower : Agent
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            EndEpisode();
+            //EndEpisode();
+            Destroy(gameObject);
         }
         age += Time.deltaTime;
     }
@@ -72,7 +73,8 @@ public class WallFollower : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        EndEpisode();
+        //EndEpisode();
+        Destroy(gameObject);
     }
 
     public override void Heuristic(float[] actionsOut)

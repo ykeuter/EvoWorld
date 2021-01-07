@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
+using Unity.MLAgents;
 
 public class WallFollowManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class WallFollowManager : MonoBehaviour
     [SerializeField] float width = 1.0f;
     [SerializeField] Reward rewardPrefab;
     [SerializeField] WallFollower playerPrefab;
+    [SerializeField] int rotation = 0;
 
     List<Reward> rewards = new List<Reward>();
     WallFollower player;
@@ -36,12 +38,13 @@ public class WallFollowManager : MonoBehaviour
         //}
         for (float x = -d; x <= d; x += width) {
             for (float z = -d; z <= d; z += width) {
-                r = Instantiate(rewardPrefab, new Vector3(x, y, z), rewardPrefab.transform.rotation);
+                r = Instantiate(rewardPrefab, transform.parent);
+                r.transform.localPosition = new Vector3(x, y, z);
                 rewards.Add(r);
             }
         }
-
-        player = Instantiate(playerPrefab);
+        Academy.Instance.OnEnvironmentReset += Reset;
+        //player = Instantiate(playerPrefab);
     }
     public void Reset()
     {
@@ -49,7 +52,9 @@ public class WallFollowManager : MonoBehaviour
         {
             r.Reset();
         }
-        player.transform.position = getRandomPosition();
+        player = Instantiate(playerPrefab, transform.parent);
+        player.transform.Rotate(0, rotation, 0);
+        //player.transform.position = getRandomPosition();
     }
 
     Vector3 getRandomPosition() {
