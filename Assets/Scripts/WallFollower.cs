@@ -10,7 +10,8 @@ public class WallFollower : Agent
     float chargeTime = 5.0f;
     float timeLeft;
     float age = 0.0f;
-    float speed = 2.0f;
+    [SerializeField] float speed = 2.0f;
+    [SerializeField] float angularSpeed = 4.0f;
     WallFollowManager wfm;
 
     private void Awake()
@@ -44,6 +45,7 @@ public class WallFollower : Agent
 
     private void FixedUpdate()
     {
+        transform.position += transform.forward * Time.fixedDeltaTime * speed;
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
@@ -54,10 +56,12 @@ public class WallFollower : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        transform.position += Vector3.forward * vectorAction[0] * Time.fixedDeltaTime * speed;
-        transform.position += Vector3.right * vectorAction[1] * Time.fixedDeltaTime * speed;
-        transform.position += Vector3.back * vectorAction[2] * Time.fixedDeltaTime * speed;
-        transform.position += Vector3.left * vectorAction[3] * Time.fixedDeltaTime * speed;
+        if (vectorAction[0] > .5) transform.Rotate(0, -angularSpeed, 0);
+        if (vectorAction[1] > .5) transform.Rotate(0, angularSpeed, 0);
+        //transform.position += Vector3.forward * vectorAction[0] * Time.fixedDeltaTime * speed;
+        //transform.position += Vector3.right * vectorAction[1] * Time.fixedDeltaTime * speed;
+        //transform.position += Vector3.back * vectorAction[2] * Time.fixedDeltaTime * speed;
+        //transform.position += Vector3.left * vectorAction[3] * Time.fixedDeltaTime * speed;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,11 +77,11 @@ public class WallFollower : Agent
 
     public override void Heuristic(float[] actionsOut)
     {   
-        float v = Input.GetAxis("Vertical");
+        //float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
-        actionsOut[0] = v > 0 ? v : 0;
+        actionsOut[0] = h < 0 ? -h : 0;
         actionsOut[1] = h > 0 ? h : 0;
-        actionsOut[2] = v < 0 ? -v : 0;
-        actionsOut[3] = h < 0 ? -h : 0;
+        //actionsOut[2] = v < 0 ? -v : 0;
+        //actionsOut[3] = h < 0 ? -h : 0;
     }
 }
