@@ -22,20 +22,6 @@ public class WallFollowManager : MonoBehaviour
         float d = (roomSize - width) / 2;
         float y = rewardPrefab.transform.position.y;
         Reward r;
-        //for (float x = -d; x <= d; x += width)
-        //{
-        //    r = Instantiate(rewardPrefab, new Vector3(x, y, d), rewardPrefab.transform.rotation);
-        //    rewards.Add(r);
-        //    r = Instantiate(rewardPrefab, new Vector3(x, y, -d), rewardPrefab.transform.rotation);
-        //    rewards.Add(r);
-        //}
-        //for (float z = -d + width; z <= d - width; z += width)
-        //{
-        //    r = Instantiate(rewardPrefab, new Vector3(d, y, z), rewardPrefab.transform.rotation);
-        //    rewards.Add(r);
-        //    r = Instantiate(rewardPrefab, new Vector3(-d, y, z), rewardPrefab.transform.rotation);
-        //    rewards.Add(r);
-        //}
         for (float x = -d; x <= d; x += width) {
             for (float z = -d; z <= d; z += width) {
                 r = Instantiate(rewardPrefab, transform.parent);

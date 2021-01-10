@@ -33,23 +33,6 @@ public class WallFollower : Agent
         gameObject.SetActive(true);
     }
 
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        //float x = transform.position.x;
-        //float z = transform.position.z;
-        //float d = wfm.roomSize / 2;
-        //float forward = z > 0 ? z / d : 0;
-        //float right = x > 0 ? x / d : 0;
-        //float back = z < 0 ? -z / d : 0;
-        //float left = x < 0 ? -x / d : 0;
-        //sensor.AddObservation(forward);
-        //sensor.AddObservation(right);
-        //sensor.AddObservation(back);
-        //sensor.AddObservation(left);
-    }
-
-
-
     private void FixedUpdate()
     {
         transform.position += transform.forward * Time.fixedDeltaTime * speed;
@@ -67,10 +50,6 @@ public class WallFollower : Agent
     {
         if (vectorAction[0] > .5) transform.Rotate(0, -angularSpeed, 0);
         if (vectorAction[1] > .5) transform.Rotate(0, angularSpeed, 0);
-        //transform.position += Vector3.forward * vectorAction[0] * Time.fixedDeltaTime * speed;
-        //transform.position += Vector3.right * vectorAction[1] * Time.fixedDeltaTime * speed;
-        //transform.position += Vector3.back * vectorAction[2] * Time.fixedDeltaTime * speed;
-        //transform.position += Vector3.left * vectorAction[3] * Time.fixedDeltaTime * speed;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -89,11 +68,8 @@ public class WallFollower : Agent
 
     public override void Heuristic(float[] actionsOut)
     {   
-        //float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
         actionsOut[0] = h < 0 ? -h : 0;
         actionsOut[1] = h > 0 ? h : 0;
-        //actionsOut[2] = v < 0 ? -v : 0;
-        //actionsOut[3] = h < 0 ? -h : 0;
     }
 }
