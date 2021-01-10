@@ -26,6 +26,13 @@ public class WallFollower : Agent
         //wfm.Reset();
     }
 
+    public void Reset()
+    {
+        timeLeft = chargeTime;
+        age = 0;
+        gameObject.SetActive(true);
+    }
+
     public override void CollectObservations(VectorSensor sensor)
     {
         //float x = transform.position.x;
@@ -49,8 +56,9 @@ public class WallFollower : Agent
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            //EndEpisode();
-            Destroy(gameObject);
+            EndEpisode();
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
         age += Time.deltaTime;
     }
@@ -73,8 +81,10 @@ public class WallFollower : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        //EndEpisode();
-        Destroy(gameObject);
+        EndEpisode();
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
+
     }
 
     public override void Heuristic(float[] actionsOut)

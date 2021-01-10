@@ -52,7 +52,9 @@ public class WallFollowManager : MonoBehaviour
         {
             r.Reset();
         }
-        player = Instantiate(playerPrefab, transform.parent);
+        if (!player) player = Instantiate(playerPrefab, transform.parent);
+        player.Reset();
+        player.transform.localPosition = new Vector3(0, player.transform.position.y, 0);
         player.transform.Rotate(0, rotation, 0);
         //player.transform.position = getRandomPosition();
     }
