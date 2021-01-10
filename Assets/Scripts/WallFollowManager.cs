@@ -30,7 +30,7 @@ public class WallFollowManager : MonoBehaviour
             }
         }
         Academy.Instance.OnEnvironmentReset += Reset;
-        //player = Instantiate(playerPrefab);
+        player = Instantiate(playerPrefab);
     }
     public void Reset()
     {
@@ -38,10 +38,9 @@ public class WallFollowManager : MonoBehaviour
         {
             r.Reset();
         }
-        if (!player) player = Instantiate(playerPrefab, transform.parent);
         player.Reset();
         player.transform.localPosition = new Vector3(0, player.transform.position.y, 0);
-        player.transform.Rotate(0, rotation, 0);
+        player.transform.localRotation = Quaternion.Euler(0, Academy.Instance.EnvironmentParameters.GetWithDefault("angle", 0), 0);
         //player.transform.position = getRandomPosition();
     }
 
