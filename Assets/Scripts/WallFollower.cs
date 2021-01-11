@@ -11,7 +11,7 @@ public class WallFollower : Agent
     float timeLeft;
     float age = 0.0f;
     [SerializeField] float speed = 2.0f;
-    [SerializeField] float angularSpeed = 4.0f;
+    [SerializeField] float angularSpeed = 400.0f;
     WallFollowManager wfm;
 
     private void Awake()
@@ -43,8 +43,7 @@ public class WallFollower : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        if (vectorAction[0] > .5) transform.Rotate(0, -angularSpeed, 0);
-        if (vectorAction[1] > .5) transform.Rotate(0, angularSpeed, 0);
+        transform.Rotate(0, angularSpeed * vectorAction[0] * Time.fixedDeltaTime, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +60,6 @@ public class WallFollower : Agent
     public override void Heuristic(float[] actionsOut)
     {   
         float h = Input.GetAxis("Horizontal");
-        actionsOut[0] = h < 0 ? -h : 0;
-        actionsOut[1] = h > 0 ? h : 0;
+        actionsOut[0] = h;
     }
 }

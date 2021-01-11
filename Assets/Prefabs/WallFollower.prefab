@@ -48,7 +48,7 @@ MonoBehaviour:
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
-  m_RayLength: 2
+  m_RayLength: 3
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -234,7 +234,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   speed: 2
-  angularSpeed: 4
+  angularSpeed: 400
 --- !u!54 &3270596179620057415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 0
     NumStackedVectorObservations: 1
-    VectorActionSize: 02000000
+    VectorActionSize: 01000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
   m_Model: {fileID: 0}
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
-  m_RayLength: 2
+  m_RayLength: 3
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
-  m_RayLength: 2
+  m_RayLength: 3
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
