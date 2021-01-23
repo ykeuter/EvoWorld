@@ -31,10 +31,11 @@ public class WallFollowManager : MonoBehaviour
             }
         }
         Academy.Instance.OnEnvironmentReset += ResetArea;
-        player = Instantiate(playerPrefab);
+        player = Instantiate(playerPrefab, transform.parent);
     }
     public void ResetArea()
     {
+        //Debug.Log("reset area");
         foreach (Reward r in rewards)
         {
             r.ResetReward();

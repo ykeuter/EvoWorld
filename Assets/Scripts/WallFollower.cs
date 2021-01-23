@@ -22,8 +22,6 @@ public class WallFollower : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(0, transform.position.y, 0);
-        idle = true;
         //wfm.Reset();
     }
 
@@ -32,6 +30,12 @@ public class WallFollower : Agent
         timeLeft = chargeTime;
         age = 0;
         idle = false;
+    }
+
+    new void EndEpisode(){
+        transform.localPosition = new Vector3(0, transform.position.y, 0);
+        idle = true;
+        base.EndEpisode();
     }
 
     private void FixedUpdate()
