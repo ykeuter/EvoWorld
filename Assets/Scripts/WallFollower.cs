@@ -13,6 +13,7 @@ public class WallFollower : Agent
     [SerializeField] float speed = 2.0f;
     [SerializeField] float angularSpeed = 400.0f;
     WallFollowManager wfm;
+    bool idle = true;
 
     private void Awake()
     {
@@ -21,17 +22,22 @@ public class WallFollower : Agent
 
     public override void OnEpisodeBegin()
     {
-        wfm.Reset();
+        transform.localPosition = new Vector3(0, transform.position.y, 0);
+        idle = true;
+        //wfm.Reset();
     }
 
-    public void Reset()
+    public void ResetPlayer()
     {
         timeLeft = chargeTime;
         age = 0;
+        idle = false;
     }
 
     private void FixedUpdate()
     {
+        if (idle) return;
+
         transform.position += transform.forward * Time.fixedDeltaTime * speed;
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)

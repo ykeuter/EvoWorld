@@ -28,7 +28,7 @@ public class Reward : MonoBehaviour
         rend.material = rewarded;
     }
 
-    public void Reset()
+    public void ResetReward()
     {
         coll.enabled = true;
         rend.material = reward;

@@ -24,27 +24,29 @@ public class WallFollowManager : MonoBehaviour
         Reward r;
         for (float x = -d; x <= d; x += width) {
             for (float z = -d; z <= d; z += width) {
+                if (Mathf.Abs(x) < width && Mathf.Abs(z) < width) continue;
                 r = Instantiate(rewardPrefab, transform.parent);
                 r.transform.localPosition = new Vector3(x, y, z);
                 rewards.Add(r);
             }
         }
-        Academy.Instance.OnEnvironmentReset += Reset;
+        Academy.Instance.OnEnvironmentReset += ResetArea;
         player = Instantiate(playerPrefab);
     }
-    public void Reset()
+    public void ResetArea()
     {
         foreach (Reward r in rewards)
         {
-            r.Reset();
+            r.ResetReward();
         }
-        player.Reset();
+        player.ResetPlayer();
         player.transform.localPosition = new Vector3(0, player.transform.position.y, 0);
-        player.transform.localRotation = Quaternion.Euler(0, Academy.Instance.EnvironmentParameters.GetWithDefault("angle", 0), 0);
-        //player.transform.position = getRandomPosition();
+        player.transform.localRotation = Quaternion.Euler(0, rotation, 0);
+        //player.transform.localRotation = Quaternion.Euler(0, Academy.Instance.EnvironmentParameters.GetWithDefault("angle", 0), 0);
+        //player.transform.position = GetRandomPosition();
     }
 
-    Vector3 getRandomPosition() {
+    Vector3 GetRandomPosition() {
         float d = roomSize / 2 - width * 1.5f;
         float x = Random.Range(-d, d);
         float y = playerPrefab.transform.position.y;
@@ -52,7 +54,7 @@ public class WallFollowManager : MonoBehaviour
         Vector3 p = new Vector3(x, y, z);
         foreach (GameObject g in obstacles) {
             if (Vector3.Distance(p, g.transform.position) < width)
-                return getRandomPosition();
+                return GetRandomPosition();
         }
         return p;
     }
