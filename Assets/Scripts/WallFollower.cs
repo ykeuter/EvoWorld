@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
 
 public class WallFollower : Agent
 {
@@ -51,9 +52,9 @@ public class WallFollower : Agent
         age += Time.deltaTime;
     }
 
-    public override void OnActionReceived(float[] vectorAction)
+    public override void OnActionReceived(ActionBuffers vectorAction)
     {
-        transform.Rotate(0, angularSpeed * vectorAction[0] * Time.fixedDeltaTime, 0);
+        transform.Rotate(0, angularSpeed * vectorAction.ContinuousActions[0] * Time.fixedDeltaTime, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,9 +68,10 @@ public class WallFollower : Agent
         EndEpisode();
     }
 
-    public override void Heuristic(float[] actionsOut)
+    public override void Heuristic(in ActionBuffers actionsOut)
     {   
         float h = Input.GetAxis("Horizontal");
-        actionsOut[0] = h;
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = h;
     }
 }
