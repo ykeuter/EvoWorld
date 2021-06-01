@@ -149,17 +149,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6890212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aca43502164a3b4ba0a023e714521f6, type: 3}
+  m_Script: {fileID: 11500000, guid: eee6d3e36cbb91245808ad0f254a1706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSize: 10
+  roomSize: 100
   width: 1
-  rewardPrefab: {fileID: 6353479446266319708, guid: 1345c596e338a134d8d025a42bb176ff,
+  foodPrefab: {fileID: 5411076629389953498, guid: a0d42ccd47740d24689e22327617b543,
     type: 3}
-  playerPrefab: {fileID: 3270596179620057414, guid: 5216c9a4311e74940bade4245ee59032,
+  agentPrefab: {fileID: 7457382315140433464, guid: c1b9b5914a8d72a428afc914ce3e7f68,
     type: 3}
-  rotation: 0
-  obstacles: []
 --- !u!4 &6890214
 Transform:
   m_ObjectHideFlags: 0
