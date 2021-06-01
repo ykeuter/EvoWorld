@@ -28,10 +28,6 @@ public class Alpha : Agent
     {
     }
 
-    new void EndEpisode()
-    {
-    }
-
     private void FixedUpdate()
     {
         transform.position += transform.forward * Time.fixedDeltaTime * speed;
