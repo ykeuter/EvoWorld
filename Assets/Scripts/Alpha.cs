@@ -8,7 +8,7 @@ using Unity.MLAgents.Actuators;
 
 public class Alpha : Agent
 {
-    float maxAge = 10f;
+    float maxAge = float.PositiveInfinity;
     float age = 0.0f;
     [SerializeField] float speed = 2.0f;
     [SerializeField] float angularSpeed = 400.0f;
