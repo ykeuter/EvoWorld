@@ -39,6 +39,8 @@ public class BasicManager : MonoBehaviour
     public void Eliminate(Agent a)
     {
         numAgents--;
+        a.gameObject.SetActive(false);
+        Debug.Log("Destroy " + a.Id);
         Destroy(a.gameObject);
         if (numAgents <= 0)
         {
@@ -48,8 +50,8 @@ public class BasicManager : MonoBehaviour
 
     public void Conceive(Agent parent1 = null, Agent parent2 = null)
     {
-        Agent newborn = Instantiate(agentPrefab, transform.parent);
         numAgents++;
-        birthChannel.Conceive(newborn.Id, parent1?.Id ?? 0, parent2?.Id ?? 0);
+        Agent newborn = Instantiate(agentPrefab, transform.parent);
+        birthChannel.Conceive(newborn.Id, parent1?.Id ?? -1, parent2?.Id ?? -1);
     }
 }

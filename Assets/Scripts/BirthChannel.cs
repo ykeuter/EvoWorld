@@ -14,7 +14,7 @@ public class BirthChannel : SideChannel
         Debug.Log("Should not happen");
     }
 
-    public void Conceive(int id, int parent1=0, int parent2=0)
+    public void Conceive(int id, int parent1=-1, int parent2=-1)
     {
         using (var msgOut = new OutgoingMessage())
         {
