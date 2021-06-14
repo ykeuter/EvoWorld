@@ -13,19 +13,16 @@ public class Alpha : Agent
     [SerializeField] float speed = 2.0f;
     [SerializeField] float angularSpeed = 400.0f;
     [SerializeField] float energyLevel = 20f;
+    [SerializeField] float birthThreshold = 40f;
+    [SerializeField] float birthCost = 10f;
     float energyRate = 1f;
     float foodEnergy = 1f;
+    BasicManager manager;
 
-    private void Awake()
+    public override void Initialize()
     {
-    }
-
-    public override void OnEpisodeBegin()
-    {
-    }
-
-    public void ResetPlayer()
-    {
+        base.Initialize();
+        manager = GameObject.Find("Game Manager").GetComponent<BasicManager>();
     }
 
     private void FixedUpdate()
@@ -35,9 +32,13 @@ public class Alpha : Agent
         age += Time.deltaTime;
         if (energyLevel < 0 || age > maxAge)
         {
-            Destroy(gameObject);
+            manager.Eliminate(this);
         }
-        
+        if (energyLevel > birthThreshold)
+        {
+            manager.Conceive(this);
+            energyLevel -= birthCost;
+        }
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
@@ -52,7 +53,7 @@ public class Alpha : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        manager.Eliminate(this);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
