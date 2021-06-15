@@ -8,13 +8,13 @@ using Unity.MLAgents.Actuators;
 
 public class Alpha : Agent
 {
-    float maxAge = 10;
+    float maxAge = 50;
     float age = 0.0f;
     [SerializeField] float speed = 2.0f;
     [SerializeField] float angularSpeed = 400.0f;
-    [SerializeField] float energyLevel = 20f;
-    [SerializeField] float birthThreshold = 25;
-    [SerializeField] float birthCost = 5;
+    [SerializeField] float energyLevel = 10f;
+    [SerializeField] float birthThreshold = 15;
+    [SerializeField] float birthCost = 10;
     float energyRate = .5f;
     float foodEnergy = 1f;
     BasicManager manager;

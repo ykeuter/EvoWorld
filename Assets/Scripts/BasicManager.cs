@@ -7,7 +7,8 @@ using Unity.MLAgents.SideChannels;
 
 public class BasicManager : MonoBehaviour
 {
-    public float roomSize = 100.0f;
+    public float roomSize = 10f;
+    float birthDistance = 2f;
     [SerializeField] float width = 1.0f;
     [SerializeField] Food foodPrefab;
     [SerializeField] Agent agentPrefab;
@@ -48,10 +49,20 @@ public class BasicManager : MonoBehaviour
         }
     }
 
-    public void Conceive(Agent parent1 = null, Agent parent2 = null)
+    public void Conceive(Agent parent1 = null)
     {
         numAgents++;
         Agent newborn = Instantiate(agentPrefab, transform.parent);
-        birthChannel.Conceive(newborn.Id, parent1?.Id ?? -1, parent2?.Id ?? -1);
+        newborn.transform.Rotate(0, Random.Range(0, 360), 0);
+        if (parent1 is null)
+        {
+            birthChannel.Conceive(newborn.Id);
+        }
+        else
+        {
+            newborn.transform.position = parent1.transform.position
+                + Quaternion.Euler(0, Random.Range(0, 360), 0) * Vector3.forward * birthDistance;
+            birthChannel.Conceive(newborn.Id, parent1.Id);
+        }
     }
 }
