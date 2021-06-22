@@ -14,6 +14,9 @@ public class BasicManager : MonoBehaviour
     [SerializeField] Agent agentPrefab;
     int numAgents = 0;
     BirthChannel birthChannel;
+    AgeChannel ageChannel;
+    float ageInterval = 100f;
+    float nextAge = 100f;
 
     private void Awake()
     {
@@ -27,14 +30,27 @@ public class BasicManager : MonoBehaviour
                 r.transform.localPosition = new Vector3(x, y, z);
             }
         }
+        ageChannel = new AgeChannel();
+        SideChannelManager.RegisterSideChannel(ageChannel);
         birthChannel = new BirthChannel();
         SideChannelManager.RegisterSideChannel(birthChannel);
+
         Conceive();
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.fixedTime > nextAge)
+        {
+            ageChannel.Age(Time.fixedTime);
+            nextAge = Mathf.Ceil(Time.fixedTime / ageInterval) * ageInterval;
+        }
     }
 
     public void OnDestroy()
     {
         SideChannelManager.UnregisterSideChannel(birthChannel);
+        SideChannelManager.UnregisterSideChannel(ageChannel);
     }
 
     public void Eliminate(Agent a)
