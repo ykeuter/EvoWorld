@@ -27,21 +27,21 @@ public class SmoothFollow : MonoBehaviour {
         transform.LookAt(target);
         return;
 
-        // Calculate the current rotation angles
-        wantedRotationAngle = target.eulerAngles.y;
-        currentRotationAngle = transform.eulerAngles.y;
+        //// Calculate the current rotation angles
+        //wantedRotationAngle = target.eulerAngles.y;
+        //currentRotationAngle = transform.eulerAngles.y;
 
-        // Damp the rotation around the y-axis
-        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 0.3f);
+        //// Damp the rotation around the y-axis
+        //currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 0.3f);
 
-        // Convert the angle into a rotation
-        currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+        //// Convert the angle into a rotation
+        //currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
-        // Set the position of the camera on the x-z plane to:
-        // distance meters behind the target
-        transform.position = target.position + (currentRotation * offsetPostion);
+        //// Set the position of the camera on the x-z plane to:
+        //// distance meters behind the target
+        //transform.position = target.position + (currentRotation * offsetPostion);
 
-        // Always look at the target
-        transform.LookAt(target);
+        //// Always look at the target
+        //transform.LookAt(target);
     }
 }
