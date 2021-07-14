@@ -33,7 +33,7 @@ public class BasicManager : MonoBehaviour
         SideChannelManager.RegisterSideChannel(birthChannel);
 
         int initSize = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("init_pop_size", 0);
-        for (int i = 0; i < initSize; initSize++) {
+        for (int i = 0; i < initSize; i++) {
             Agent a = AddAgent();
             float x = Random.Range(-roomSize / 2 + width, roomSize / 2 - width);
             float z = Random.Range(-roomSize / 2 + width, roomSize / 2 - width);
