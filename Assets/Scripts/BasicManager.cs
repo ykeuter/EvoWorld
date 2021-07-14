@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.SideChannels;
 
@@ -35,7 +32,16 @@ public class BasicManager : MonoBehaviour
         birthChannel = new BirthChannel();
         SideChannelManager.RegisterSideChannel(birthChannel);
 
-        Conceive();
+        int initSize = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("init_pop_size", 0);
+        for (int i = 0; i < initSize; initSize++) {
+            Agent a = AddAgent();
+            float x = Random.Range(-roomSize / 2 + width, roomSize / 2 - width);
+            float z = Random.Range(-roomSize / 2 + width, roomSize / 2 - width);
+            a.transform.Translate(x, 0, z);
+        }
+        if (initSize <= 0) {
+            Conceive();
+        }
     }
 
     private void FixedUpdate()
@@ -65,11 +71,17 @@ public class BasicManager : MonoBehaviour
         }
     }
 
-    public void Conceive(Agent parent1 = null)
+    private Agent AddAgent()
     {
         numAgents++;
         Agent newborn = Instantiate(agentPrefab, transform.parent);
         newborn.transform.Rotate(0, Random.Range(0, 360), 0);
+        return newborn;
+    }
+
+    public void Conceive(Agent parent1 = null)
+    {
+        Agent newborn = AddAgent();
         if (parent1 is null)
         {
             birthChannel.Conceive(newborn.Id);
