@@ -196,9 +196,9 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 200
+  MaxStep: 1000
   speed: 2
-  angularSpeed: 400
+  angularSpeed: 250
   target: {fileID: 0}
 --- !u!1 &6310796238544749469
 GameObject:
