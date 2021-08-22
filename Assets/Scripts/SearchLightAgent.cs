@@ -11,13 +11,14 @@ public class SearchLightAgent : Agent
     [SerializeField] float speed = 2.0f;
     [SerializeField] float angularSpeed = 400.0f;
     [SerializeField] GameObject target;
-    float size = 5;
+    float size = 2;
     float height;
     bool idle = true;
 
     private void Awake()
     {
         height = transform.localPosition.y;
+        Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
     public void ResetPlayer()
@@ -36,7 +37,6 @@ public class SearchLightAgent : Agent
         SetReward(Vector3.Distance(Vector3.ProjectOnPlane(transform.position, Vector3.up), target.transform.position));
     }
 
- 
     private void OnCollisionEnter(Collision collision)
     {
         idle = true;
