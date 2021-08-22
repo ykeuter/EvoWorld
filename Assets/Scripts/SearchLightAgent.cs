@@ -21,11 +21,6 @@ public class SearchLightAgent : Agent
         Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
-    public override void OnEpisodeBegin()
-    {
-        ResetPlayer();
-    }
-
     public void ResetPlayer()
     {
         target.transform.localPosition = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
