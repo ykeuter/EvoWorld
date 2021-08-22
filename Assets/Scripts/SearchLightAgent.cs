@@ -34,7 +34,7 @@ public class SearchLightAgent : Agent
             transform.Rotate(0, angularSpeed * vectorAction.ContinuousActions[0] * Time.fixedDeltaTime, 0);
             transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
         }
-        SetReward(Vector3.Distance(Vector3.ProjectOnPlane(transform.position, Vector3.up), target.transform.position));
+        SetReward(-Vector3.Distance(Vector3.ProjectOnPlane(transform.position, Vector3.up), target.transform.position));
     }
 
     private void OnCollisionEnter(Collision collision)
