@@ -544,16 +544,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1496233792415968350, guid: 5b18a4777a3617442b7f92abe5b8f396,
-        type: 3}
-      propertyPath: MaxStep
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496233792415968350, guid: 5b18a4777a3617442b7f92abe5b8f396,
-        type: 3}
-      propertyPath: angularSpeed
-      value: 250
-      objectReference: {fileID: 0}
     - target: {fileID: 2774571173753955235, guid: 5b18a4777a3617442b7f92abe5b8f396,
         type: 3}
       propertyPath: m_BehaviorType
