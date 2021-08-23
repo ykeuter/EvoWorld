@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2414604459602852837}
   - component: {fileID: 2414604459602852838}
   - component: {fileID: 2414604459602852839}
-  - component: {fileID: 2414604459602852824}
+  - component: {fileID: 1290021761328784877}
   m_Layer: 0
   m_Name: Bullseye
   m_TagString: Untagged
@@ -82,17 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2414604459602852824
-CapsuleCollider:
+--- !u!135 &1290021761328784877
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2414604459602852825}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 20, z: 0}

@@ -14,11 +14,17 @@ public class SearchLightAgent : Agent
     float size = 2;
     float height;
     bool idle = true;
+    //float punish = -10;
 
     private void Awake()
     {
         height = transform.localPosition.y;
         Academy.Instance.OnEnvironmentReset += ResetPlayer;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        AddReward(.1f);
     }
 
     public void ResetPlayer()
@@ -33,13 +39,17 @@ public class SearchLightAgent : Agent
     {   if (!idle) {
             transform.Rotate(0, angularSpeed * vectorAction.ContinuousActions[0] * Time.fixedDeltaTime, 0);
             transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
+            //SetReward(-Vector3.Distance(Vector3.ProjectOnPlane(transform.localPosition, Vector3.up), target.transform.localPosition));
         }
-        SetReward(-Vector3.Distance(Vector3.ProjectOnPlane(transform.localPosition, Vector3.up), target.transform.localPosition));
+        //else {
+        //    SetReward(punish);
+        //}
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         idle = true;
+        //SetReward(punish);
         EndEpisode();
     }
 
