@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SearchLightMulti.unity
+    guid: 12ef8a02eb8c00541891bc1111bc2908
   m_configObjects: {}
