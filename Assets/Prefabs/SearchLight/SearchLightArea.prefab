@@ -65,7 +65,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 7a40a26b62c550644be675597dd47a2c, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 0c8326f5b5fc8e4439c4f7bb997be3f2, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
@@ -258,8 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 5872016247182305382}
   m_SensorName: CameraSensor
-  m_Width: 16
-  m_Height: 16
+  m_Width: 4
+  m_Height: 4
   m_Grayscale: 1
   m_ObservationType: 0
   m_ObservationStacks: 1
@@ -279,8 +279,8 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
-  speed: 2
+  MaxStep: 50
+  speed: 20
   target: {fileID: 0}
 --- !u!1 &6446977142228107266
 GameObject:
@@ -562,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9bae0a1e6ac8e3d48bc1a8fd6e93b7cf, type: 2}
+  - {fileID: 2100000, guid: d1ac4936017ef3c46a79b82c741c787b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
