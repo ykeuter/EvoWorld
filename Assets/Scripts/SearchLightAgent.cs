@@ -29,10 +29,10 @@ public class SearchLightAgent : Agent
 
     public void ResetPlayer()
     {
-        target.transform.localPosition = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
-        transform.localPosition = Vector3.up * height;
-        transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
-        idle = false;
+        //target.transform.localPosition = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
+        //transform.localPosition = Vector3.up * height;
+        //transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
+        //idle = false;
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
