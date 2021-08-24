@@ -281,7 +281,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 50
   speed: 20
-  target: {fileID: 0}
+  target: {fileID: 7051817585212839554}
 --- !u!1 &6446977142228107266
 GameObject:
   m_ObjectHideFlags: 0

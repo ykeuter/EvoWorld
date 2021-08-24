@@ -13,31 +13,33 @@ public class SearchLightAgent : Agent
     float height;
     bool idle = true;
 
+    (Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
+        (Vector3.forward, Vector3.zero),
+        (Vector3.back, Vector3.zero),
+        (Vector3.left, Vector3.up * 90),
+        (Vector3.right, Vector3.up * 90)
+    };
+
     private void Awake()
     {
         height = transform.localPosition.y;
         Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
-    private void OnTriggerStay(Collider other)
+    public void ResetPlayer()
+    {
+        int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
+        transform.localPosition = Vector3.up * height;
+        target.transform.localPosition = cases[caseId].pos;
+        target.transform.localEulerAngles = cases[caseId].rot;
+        idle = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         idle = true;
         AddReward(1);
         EndEpisode();
-    }
-
-    public void ResetPlayer()
-    {
-
-        transform.localPosition = Vector3.up * height;
-        idle = false;
-    }
-
-    public override void OnActionReceived(ActionBuffers vectorAction)
-    {   if (!idle) {
-            transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
-            transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
-        }
     }
 
     private void OnCollisionEnter()
@@ -45,6 +47,13 @@ public class SearchLightAgent : Agent
         idle = true;
         AddReward(-1);
         EndEpisode();
+    }
+
+    public override void OnActionReceived(ActionBuffers vectorAction)
+    {   if (!idle) {
+            transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
+            transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
