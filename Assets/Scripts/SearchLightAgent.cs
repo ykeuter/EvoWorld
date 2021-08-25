@@ -38,7 +38,8 @@ public class SearchLightAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (idle) return;
+        if (idle)
+            return;
         if (other.gameObject == target)
         {
             AddReward(1);
