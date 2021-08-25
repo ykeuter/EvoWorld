@@ -38,23 +38,23 @@ public class SearchLightAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
+        if (idle) return;
+        if (other.gameObject == target)
+        {
+            AddReward(1);
+        }
+        else
+        {
+            AddReward(-1);
+        }
         idle = true;
-        AddReward(1);
-        EndEpisode();
-    }
-
-    private void OnCollisionEnter()
-    {
-        idle = true;
-        AddReward(-1);
         EndEpisode();
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
-    {   if (!idle) {
-            transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
-            transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
-        }
+    {   if (idle) return;
+        transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
+        transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
