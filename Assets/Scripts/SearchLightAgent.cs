@@ -52,17 +52,17 @@ public class SearchLightAgent : Agent
 
     public override void OnActionReceived(ActionBuffers vectorAction)
     {   if (!idle) {
-            transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
-            transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
+            transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
+            transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
         }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
-        float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        continuousActionsOut[0] = h;
-        continuousActionsOut[1] = v;
+        float h = Input.GetAxis("Horizontal");
+        continuousActionsOut[0] = v;
+        continuousActionsOut[1] = h;
     }
 }
