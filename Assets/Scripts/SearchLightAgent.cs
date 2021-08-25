@@ -28,8 +28,9 @@ public class SearchLightAgent : Agent
 
     public void ResetPlayer()
     {
-        int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
         transform.localPosition = Vector3.up * height;
+        transform.localEulerAngles = Vector3.zero;
+        int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
         target.transform.localPosition = cases[caseId].pos;
         target.transform.localEulerAngles = cases[caseId].rot;
         idle = false;
