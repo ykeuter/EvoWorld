@@ -10,7 +10,7 @@ public class SearchLightAgent : Agent
 {
     [SerializeField] float speed = 20.0f;
     [SerializeField] GameObject target;
-    float height;
+    Vector3 startPos;
     bool idle = true;
 
     (Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
@@ -22,13 +22,13 @@ public class SearchLightAgent : Agent
 
     private void Awake()
     {
-        height = transform.localPosition.y;
+        startPos = transform.localPosition;
         Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
     public void ResetPlayer()
     {
-        transform.localPosition = Vector3.up * height;
+        transform.localPosition = startPos;
         transform.localEulerAngles = Vector3.zero;
         int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
         target.transform.localPosition = cases[caseId].pos;
@@ -38,8 +38,7 @@ public class SearchLightAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (idle)
-            return;
+        if (idle) return;
         if (other.gameObject == target)
         {
             AddReward(1);
