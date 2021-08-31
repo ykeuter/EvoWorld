@@ -8,7 +8,7 @@ using Unity.MLAgents.Actuators;
 
 public class SearchLightAgent : Agent
 {
-    [SerializeField] float speed = 20.0f;
+    float speed = 1.0f;
     [SerializeField] GameObject target;
     Vector3 startPos;
     bool idle = true;
@@ -42,10 +42,12 @@ public class SearchLightAgent : Agent
         if (other.gameObject == target)
         {
             AddReward(1);
+            Debug.Log("you win");
         }
         else
         {
             AddReward(-1);
+            Debug.Log("you lose");
         }
         idle = true;
         EndEpisode();
