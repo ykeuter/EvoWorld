@@ -14,10 +14,10 @@ public class SearchLightAgent : Agent
     bool idle = true;
 
     (Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
-        (Vector3.forward, Vector3.zero),
-        (Vector3.back, Vector3.zero),
-        (Vector3.left, Vector3.up * 90),
-        (Vector3.right, Vector3.up * 90)
+        (Vector3.forward * 2, Vector3.zero),
+        (Vector3.back * 2, Vector3.zero),
+        (Vector3.left * 2, Vector3.up * 90),
+        (Vector3.right * 2, Vector3.up * 90)
     };
 
     private void Awake()

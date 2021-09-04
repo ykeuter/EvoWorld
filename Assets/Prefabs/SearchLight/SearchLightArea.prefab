@@ -374,7 +374,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 50
+  MaxStep: 500
   target: {fileID: 3893776420854943542}
 --- !u!1 &8007811898385759250
 GameObject:
