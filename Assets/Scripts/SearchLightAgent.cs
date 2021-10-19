@@ -8,17 +8,18 @@ using Unity.MLAgents.Actuators;
 
 public class SearchLightAgent : Agent
 {
-    float speed = 1.0f;
+    readonly float speed = 1.0f;
     [SerializeField] GameObject target;
     Vector3 startPos;
-    bool idle = true;
+    readonly float bound = 2.0f;
+    //bool idle = true;
 
-    (Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
-        (Vector3.forward * 2, Vector3.zero),
-        (Vector3.back * 2, Vector3.zero),
-        (Vector3.left * 2, Vector3.up * 90),
-        (Vector3.right * 2, Vector3.up * 90)
-    };
+    //(Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
+    //    (Vector3.forward * 2, Vector3.zero),
+    //    (Vector3.back * 2, Vector3.zero),
+    //    (Vector3.left * 2, Vector3.up * 90),
+    //    (Vector3.right * 2, Vector3.up * 90)
+    //};
 
     private void Awake()
     {
@@ -26,37 +27,50 @@ public class SearchLightAgent : Agent
         Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
+    public override void OnEpisodeBegin()
+    {
+        Debug.Log("new episode");
+    }
+
     public void ResetPlayer()
     {
         transform.localPosition = startPos;
         transform.localEulerAngles = Vector3.zero;
-        int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
-        target.transform.localPosition = cases[caseId].pos;
-        target.transform.localEulerAngles = cases[caseId].rot;
-        idle = false;
+        //int caseId = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("case_id", 0);
+        //target.transform.localPosition = cases[caseId].pos;
+        //target.transform.localEulerAngles = cases[caseId].rot;
+        //idle = false;
+        target.transform.localPosition = GetRandomPosition();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (idle) return;
-        if (other.gameObject == target)
-        {
-            AddReward(1);
-            Debug.Log("you win");
-        }
-        else
-        {
-            AddReward(-1);
-            Debug.Log("you lose");
-        }
-        idle = true;
-        EndEpisode();
+        //if (idle) return;
+        //if (other.gameObject == target)
+        //{
+        AddReward(1);
+        Debug.Log("you win");
+        target.transform.localPosition = GetRandomPosition();
+        //}
+        //else
+        //{
+        //    AddReward(-1);
+        //    Debug.Log("you lose");
+        //}
+        //idle = true;
+        //EndEpisode();
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        return new Vector3(Random.Range(-bound, bound), 0, Random.Range(-bound, bound));
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
-    {   if (idle) return;
-        transform.position += transform.forward * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0];
-        transform.position += transform.right * Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[1];
+    {   
+        //if (idle) return;
+        transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[0] - vectorAction.ContinuousActions[1]) * transform.forward;
+        transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[2] - vectorAction.ContinuousActions[3]) * transform.right;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -64,7 +78,9 @@ public class SearchLightAgent : Agent
         var continuousActionsOut = actionsOut.ContinuousActions;
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
-        continuousActionsOut[0] = v;
-        continuousActionsOut[1] = h;
+        if (v > 0) continuousActionsOut[0] = v;
+        else continuousActionsOut[1] = -v;
+        if (h > 0) continuousActionsOut[2] = h;
+        else continuousActionsOut[3] = -h;
     }
 }

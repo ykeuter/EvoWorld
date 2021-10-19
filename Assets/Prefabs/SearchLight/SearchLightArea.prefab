@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920383473576304277}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4446457185175472756}
@@ -55,9 +55,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.01
+  far clip plane: 2.5
+  field of view: 120
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -291,9 +291,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &4448782897760320546
 MonoBehaviour:
@@ -325,9 +325,9 @@ MonoBehaviour:
     VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 2
+      m_NumContinuousActions: 4
       BranchSizes: 
-    VectorActionSize: 02000000
+    VectorActionSize: 04000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -374,7 +374,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 500
+  MaxStep: 2000
   target: {fileID: 3893776420854943542}
 --- !u!1 &8007811898385759250
 GameObject:
@@ -594,7 +594,7 @@ PrefabInstance:
     - target: {fileID: 4862598637377973109, guid: 503961e104b22f0489e5d514cb0bd8b9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503961e104b22f0489e5d514cb0bd8b9, type: 3}
@@ -614,6 +614,11 @@ PrefabInstance:
     - target: {fileID: 2685006698459831902, guid: 503961e104b22f0489e5d514cb0bd8b9,
         type: 3}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685006698459831902, guid: 503961e104b22f0489e5d514cb0bd8b9,
+        type: 3}
+      propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2685006698459831902, guid: 503961e104b22f0489e5d514cb0bd8b9,
@@ -684,7 +689,7 @@ PrefabInstance:
     - target: {fileID: 4862598637377973109, guid: 503961e104b22f0489e5d514cb0bd8b9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503961e104b22f0489e5d514cb0bd8b9, type: 3}
@@ -774,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 4862598637377973109, guid: 503961e104b22f0489e5d514cb0bd8b9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503961e104b22f0489e5d514cb0bd8b9, type: 3}
@@ -869,7 +874,7 @@ PrefabInstance:
     - target: {fileID: 4862598637377973109, guid: 503961e104b22f0489e5d514cb0bd8b9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503961e104b22f0489e5d514cb0bd8b9, type: 3}
