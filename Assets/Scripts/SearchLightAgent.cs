@@ -9,6 +9,7 @@ using Unity.MLAgents.Actuators;
 public class SearchLightAgent : Agent
 {
     readonly float speed = 1.0f;
+    readonly float rotSpeed = 180.0f;
     [SerializeField] GameObject target;
     Vector3 startPos;
     readonly float bound = 2.0f;
@@ -63,24 +64,27 @@ public class SearchLightAgent : Agent
 
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-bound, bound), 0, Random.Range(-bound, bound));
+        return new Vector3(Random.Range(-bound, bound), startPos.y, Random.Range(-bound, bound));
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
     {   
         //if (idle) return;
-        transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[0] - vectorAction.ContinuousActions[1]) * transform.forward;
-        transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[2] - vectorAction.ContinuousActions[3]) * transform.right;
+        transform.position += Time.fixedDeltaTime * speed * vectorAction.ContinuousActions[0] * transform.forward;
+        transform.Rotate(0, Time.fixedDeltaTime * rotSpeed * (vectorAction.ContinuousActions[2] - vectorAction.ContinuousActions[1]), 0);
+        //transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[0] - vectorAction.ContinuousActions[1]) * transform.forward;
+        //transform.position += Time.fixedDeltaTime * speed * (vectorAction.ContinuousActions[2] - vectorAction.ContinuousActions[3]) * transform.right;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
-        float v = Input.GetAxis("Vertical");
+        //float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
-        if (v > 0) continuousActionsOut[0] = v;
-        else continuousActionsOut[1] = -v;
+        //if (v > 0) continuousActionsOut[0] = v;
+        //else continuousActionsOut[1] = -v;
         if (h > 0) continuousActionsOut[2] = h;
-        else continuousActionsOut[3] = -h;
+        else continuousActionsOut[1] = -h;
+        continuousActionsOut[0] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
     }
 }
