@@ -11,8 +11,12 @@ public class SearchLightAgent : Agent
     readonly float speed = 1.0f;
     readonly float rotSpeed = 180.0f;
     [SerializeField] GameObject target;
+    [SerializeField] GameObject [] obstacles;
     Vector3 startPos;
     readonly float bound = 2.0f;
+    readonly float margin = 1.25f;
+    readonly float reward = 1f;
+    readonly float punish = -2f;
     //bool idle = true;
 
     //(Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
@@ -47,24 +51,39 @@ public class SearchLightAgent : Agent
     private void OnTriggerStay(Collider other)
     {
         //if (idle) return;
-        //if (other.gameObject == target)
-        //{
-        AddReward(1);
-        Debug.Log("you win");
-        target.transform.localPosition = GetRandomPosition();
-        //}
-        //else
-        //{
-        //    AddReward(-1);
-        //    Debug.Log("you lose");
-        //}
+        if (other.gameObject == target)
+        {
+            AddReward(reward);
+            Debug.Log("you win");
+            target.transform.localPosition = GetRandomPosition();
+        }
+        else
+        {
+            AddReward(punish);
+            Debug.Log("you lose");
+        }
         //idle = true;
         //EndEpisode();
     }
 
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-bound, bound), startPos.y, Random.Range(-bound, bound));
+        Vector3 p = new Vector3(Random.Range(-bound, bound), startPos.y, Random.Range(-bound, bound));
+        while (!ValidatePosition(p)) p = new Vector3(Random.Range(-bound, bound), startPos.y, Random.Range(-bound, bound));
+        return p;
+    }
+
+    private bool ValidatePosition(Vector3 p)
+    {
+        Vector3 p2 = transform.localPosition;
+        if (Mathf.Abs(p2.x - p.x) < margin || Mathf.Abs(p2.z - p.z) < margin) return false;
+
+        foreach (GameObject g in obstacles)
+        {
+            p2 = g.transform.localPosition;
+            if (Mathf.Abs(p2.x - p.x) < margin || Mathf.Abs(p2.z - p.z) < margin) return false;
+        }
+        return true;
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
