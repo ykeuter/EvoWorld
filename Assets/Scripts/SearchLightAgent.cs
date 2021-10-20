@@ -48,7 +48,7 @@ public class SearchLightAgent : Agent
         target.transform.localPosition = GetRandomPosition();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //if (idle) return;
         if (other.gameObject == target)
@@ -76,12 +76,12 @@ public class SearchLightAgent : Agent
     private bool ValidatePosition(Vector3 p)
     {
         Vector3 p2 = transform.localPosition;
-        if (Mathf.Abs(p2.x - p.x) < margin || Mathf.Abs(p2.z - p.z) < margin) return false;
+        if (Mathf.Abs(p2.x - p.x) < margin && Mathf.Abs(p2.z - p.z) < margin) return false;
 
         foreach (GameObject g in obstacles)
         {
             p2 = g.transform.localPosition;
-            if (Mathf.Abs(p2.x - p.x) < margin || Mathf.Abs(p2.z - p.z) < margin) return false;
+            if (Mathf.Abs(p2.x - p.x) < margin && Mathf.Abs(p2.z - p.z) < margin) return false;
         }
         return true;
     }
