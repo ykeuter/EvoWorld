@@ -6,7 +6,6 @@ TagManager:
   tags:
   - CaptureCameras
   - ViewCameras
-  - Reward
   layers:
   - Default
   - TransparentFX

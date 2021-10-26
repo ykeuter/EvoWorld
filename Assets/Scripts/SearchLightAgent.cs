@@ -9,35 +9,16 @@ using Unity.MLAgents.Actuators;
 public class SearchLightAgent : Agent
 {
     readonly float speed = 1.0f;
-    //readonly float rotSpeed = 90.0f;
-    //[SerializeField] GameObject good;
-    //[SerializeField] GameObject bad;
-    [SerializeField] GameObject[] cases;
-    GameObject activeObject;
+    [SerializeField] GameObject good;
     Vector3 startPosPlayer;
     Vector3 startPosObject;
-    //readonly float bound = 2.0f;
-    //readonly float margin = 1.25f;
+    readonly float bound = .7f;
     readonly float reward = 1f;
-    readonly float punish = -1f;
-    int caseId = 0;
-    //float startZ = 2f;
-    //float startX = 1f;
-
-    //bool idle = true;
-
-    //(Vector3 pos, Vector3 rot)[] cases = new (Vector3 pos, Vector3 rot)[] {
-    //    (Vector3.forward * 2, Vector3.zero),
-    //    (Vector3.back * 2, Vector3.zero),
-    //    (Vector3.left * 2, Vector3.up * 90),
-    //    (Vector3.right * 2, Vector3.up * 90)
-    //};
 
     private void Awake()
     {
         startPosPlayer = transform.localPosition;
-        activeObject = cases[0];
-        startPosObject = activeObject.transform.localPosition;
+        startPosObject = good.transform.localPosition;
         //Academy.Instance.OnEnvironmentReset += ResetPlayer;
     }
 
@@ -45,8 +26,7 @@ public class SearchLightAgent : Agent
     {
         Debug.Log("new episode");
         transform.localPosition = startPosPlayer;
-        caseId = 0;
-        NextCase();
+        Spawn();
     }
 
     //public void ResetPlayer()
@@ -60,36 +40,18 @@ public class SearchLightAgent : Agent
     //    target.transform.localPosition = GetRandomPosition();
     //}
 
-    void NextCase()
+    void Spawn()
     {
-        if (caseId >= cases.Length) {
-            EndEpisode();
-            return;
-        }
-        activeObject.SetActive(false);
-        activeObject = cases[caseId];
-        activeObject.transform.localPosition = startPosObject;
-        activeObject.SetActive(true);
-        caseId++;
+        startPosObject.x = Random.Range(-bound, bound);
+        good.transform.localPosition = startPosObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (idle) return;
-        if (other.gameObject.CompareTag("Reward"))
-        {
-            AddReward(reward);
-            Debug.Log("you win");
-            //target.transform.localPosition = GetRandomPosition();
-        }
-        else
-        {
-            AddReward(punish);
-            Debug.Log("you lose");
-        }
-        NextCase();
-        //idle = true;
-        //EndEpisode();
+        AddReward(reward);
+        Debug.Log("you win");
+        Spawn();
+
     }
 
     //private Vector3 GetRandomPosition()
@@ -114,8 +76,8 @@ public class SearchLightAgent : Agent
 
     private void FixedUpdate()
     {
-        activeObject.transform.position -= Time.fixedDeltaTime * speed * activeObject.transform.forward;
-        if (activeObject.transform.localPosition.z < startPosPlayer.z) NextCase();
+        good.transform.position -= Time.fixedDeltaTime * speed * good.transform.forward;
+        if (good.transform.localPosition.z < startPosPlayer.z) Spawn();
     }
 
     public override void OnActionReceived(ActionBuffers vectorAction)
