@@ -10,10 +10,12 @@ public class SearchLightAgent : Agent
 {
     readonly float speed = 1.0f;
     [SerializeField] GameObject good;
+    [SerializeField] GameObject bad;
     Vector3 startPosPlayer;
     Vector3 startPosObject;
     readonly float bound = .7f;
     readonly float reward = 1f;
+    readonly float punish = -1f;
 
     private void Awake()
     {
@@ -42,14 +44,20 @@ public class SearchLightAgent : Agent
 
     void Spawn()
     {
-        startPosObject.x = Random.Range(-bound, bound);
-        good.transform.localPosition = startPosObject;
+        good.transform.localPosition = new Vector3(Random.Range(-bound, bound), startPosObject.y, startPosObject.z);
+        bad.transform.localPosition = new Vector3(Random.Range(-bound, bound), startPosObject.y, startPosObject.z);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        AddReward(reward);
-        Debug.Log("you win");
+        if (other.gameObject == good) {
+            AddReward(reward);
+            Debug.Log("you win");
+        }
+        else {
+            AddReward(punish);
+            Debug.Log("you loose");
+        }
         Spawn();
 
     }
@@ -77,6 +85,7 @@ public class SearchLightAgent : Agent
     private void FixedUpdate()
     {
         good.transform.position -= Time.fixedDeltaTime * speed * good.transform.forward;
+        bad.transform.position -= Time.fixedDeltaTime * speed * bad.transform.forward;
         if (good.transform.localPosition.z < startPosPlayer.z) Spawn();
     }
 
